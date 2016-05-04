@@ -5,7 +5,11 @@ require 'pry'
 
 class Comment
 
-  @@doc = Nokogiri::HTML(open("post.html"))
+  begin
+    @@doc = Nokogiri::HTML(open("post.html"))
+  rescue IOError => e
+    puts "File not found"
+  end
 
   attr_reader :text
   attr_accessor :user

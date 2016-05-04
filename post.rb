@@ -9,7 +9,12 @@ require 'colorize'
 class Post
 
   attr_reader :item_id, :doc, :url, :points, :title, :comments
-  @@doc = Nokogiri::HTML(open("post.html"))
+
+  begin
+    @@doc = Nokogiri::HTML(open("post.html"))
+  rescue IOError => e
+    puts "File not found"
+  end
 
   def initialize
     @title = extract_title(doc)
